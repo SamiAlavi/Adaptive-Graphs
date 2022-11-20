@@ -60,5 +60,5 @@ def generateDataset(numNodes: int, maxConnectionsBetweenNodes: int, minifyJson: 
     writeJson(nodes, matrix, minifyJson)
     printExample(nodes, matrix)
 
-
-generateDataset(10, 2, True)
+if (__name__ == "__main__"):
+    generateDataset(10, 2, True)
