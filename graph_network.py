@@ -35,7 +35,7 @@ class NetworkX(BaseGraph):
     def drawGraph(self) -> None:
         seed = 13648  # Seed random number generators for reproducibility
         pos = nx.spring_layout(self.graph, seed=seed)
-        plt.figure("Graph", figsize=(12,7))
+        plt.figure("Graph_NetworkX", figsize=(12,7))
         nx.draw(self.graph, pos, edge_color='black', width=1, linewidths=1, alpha=0.9, with_labels=True)
         edgeLabels = nx.get_edge_attributes(self.graph, 'weight')
         nx.draw_networkx_edge_labels(self.graph, pos, edge_labels=edgeLabels, font_color='red', font_family="arial")
