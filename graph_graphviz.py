@@ -4,6 +4,7 @@ import graphviz
 class GraphViz(BaseGraph):
     def __init__(self) -> None:
         super().__init__()
+        self.graph = graphviz.Digraph(comment='Graph_GraphViz')
 
     def addGraphNodes(self) -> None:
         for node in super()._getGraphNodes():
@@ -15,13 +16,6 @@ class GraphViz(BaseGraph):
 
     def printGraphProperties(self) -> None:
         print(self.graph.source)
-
-    def createGraph(self) -> None:
-        self.graph = graphviz.Digraph(comment='Graph_GraphViz')
-
-        self.addGraphNodes()
-        self.addGraphEdges()
-        self.printGraphProperties()
 
     def drawGraph(self) -> None:
         # make sure graphviz is installed and is in PATH, https://www.graphviz.org/download/

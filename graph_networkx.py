@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 class NetworkX(BaseGraph):
     def __init__(self) -> None:
         super().__init__()
+        self.graph = nx.DiGraph()
 
     def addGraphNodes(self) -> None:
         for node in super()._getGraphNodes():
@@ -18,13 +19,6 @@ class NetworkX(BaseGraph):
         print("Total number of nodes: ", int(self.graph.number_of_nodes()))
         print("Total number of edges: ", int(self.graph.number_of_edges()))
         print("Degree for all nodes: ", dict(self.graph.degree()))
-
-    def createGraph(self) -> None:
-        self.graph = nx.DiGraph()
-
-        self.addGraphNodes()
-        self.addGraphEdges()
-        self.printGraphProperties()
 
     def drawGraph(self) -> None:
         seed = 13648  # Seed random number generators for reproducibility
