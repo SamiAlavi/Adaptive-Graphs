@@ -61,4 +61,4 @@ def generateDataset(numNodes: int, maxConnectionsBetweenNodes: int, minifyJson: 
     printExample(nodes, matrix)
 
 if (__name__ == "__main__"):
-    generateDataset(10, 2, True)
+    generateDataset(10, 1, True)
