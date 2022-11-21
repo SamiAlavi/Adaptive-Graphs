@@ -1,4 +1,3 @@
-from typing import List
 from graph import BaseGraph
 import networkx as nx
 import matplotlib.pyplot as plt
