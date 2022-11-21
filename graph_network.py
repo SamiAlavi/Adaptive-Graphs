@@ -25,6 +25,13 @@ class NetworkX(BaseGraph):
         print("Total number of edges: ", int(self.graph.number_of_edges()))
         print("Degree for all nodes: ", dict(self.graph.degree()))
 
+    def createGraph(self) -> None:
+        self.graph = nx.DiGraph()
+
+        self.addGraphNodes()
+        self.addGraphEdges()
+        self.printGraphProperties()
+
     def drawGraph(self) -> None:
         seed = 13648  # Seed random number generators for reproducibility
         pos = nx.spring_layout(self.graph, seed=seed)
@@ -34,14 +41,6 @@ class NetworkX(BaseGraph):
         nx.draw_networkx_edge_labels(self.graph, pos, edge_labels=edgeLabels, font_color='red', font_family="arial")
         plt.axis('off')
         plt.show()
-        
-
-    def createGraph(self) -> None:
-        self.graph = nx.DiGraph()
-
-        self.addGraphNodes()
-        self.addGraphEdges()
-        self.printGraphProperties()
 
 
 if (__name__ == "__main__"):
