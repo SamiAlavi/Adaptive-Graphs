@@ -32,9 +32,12 @@ class BaseGraph(metaclass=ABCMeta):
                         yield nodeA, nodeB, weight
 
     def createGraph(self) -> None:
-        self.addGraphNodes()
-        self.addGraphEdges()
-        self.printGraphProperties()
+        try:
+            self.addGraphNodes()
+            self.addGraphEdges()
+            self.printGraphProperties()
+        except Exception as e:
+            print(str(e))
 
     @abstractmethod
     def addGraphNodes(self) -> None:
