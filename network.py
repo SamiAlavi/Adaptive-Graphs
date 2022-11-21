@@ -1,22 +1,16 @@
-import json
 from typing import List
+from graph import Graph
 import networkx as nx
 import matplotlib.pyplot as plt
 
-class Network:
-    jsonPath = "network generation/network.json"
+class Network(Graph):
+    def __init__(self) -> None:
+        super().__init__()
 
-    def readNetworkJson(self) -> dict:
-        with open(self.jsonPath, 'r') as file:
-            network = json.load(file)
-            
-        self.nodes = network["nodes"]
-        self.matrix = network["matrix"]
-
-    def __addGraphNodes(self):
+    def addGraphNodes(self) -> None:
         self.graph.add_nodes_from(self.nodes)
 
-    def __addGraphEdges(self):
+    def addGraphEdges(self) -> None:
         numNodes = len(self.nodes)
         for nodeAIndex in range(numNodes):
             nodeA = self.nodes[nodeAIndex]
@@ -26,12 +20,12 @@ class Network:
                 for weight in weights:
                     self.graph.add_edge(nodeA, nodeB, weight=weight)
 
-    def __printGraphProperties(self):
+    def printGraphProperties(self) -> None:
         print("Total number of nodes: ", int(self.graph.number_of_nodes()))
         print("Total number of edges: ", int(self.graph.number_of_edges()))
         print("Degree for all nodes: ", dict(self.graph.degree()))
 
-    def drawGraph(self):
+    def drawGraph(self) -> None:
         seed = 13648  # Seed random number generators for reproducibility
         pos = nx.spring_layout(self.graph, seed=seed)
         plt.figure("Graph", figsize=(12,7))
@@ -42,17 +36,16 @@ class Network:
         plt.show()
         
 
-    def createGraph(self):
+    def createGraph(self) -> None:
         self.graph = nx.DiGraph()
 
-        self.__addGraphNodes()
-        self.__addGraphEdges()
-        self.__printGraphProperties()
+        self.addGraphNodes()
+        self.addGraphEdges()
+        self.printGraphProperties()
 
 
 if (__name__ == "__main__"):
     network = Network()
-    network.readNetworkJson()
     network.createGraph()
     network.drawGraph()
 
