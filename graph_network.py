@@ -7,17 +7,12 @@ class NetworkX(BaseGraph):
         super().__init__()
 
     def addGraphNodes(self) -> None:
-        self.graph.add_nodes_from(self.nodes)
+        for node in super()._getGraphNodes():
+            self.graph.add_node(node)
 
     def addGraphEdges(self) -> None:
-        numNodes = len(self.nodes)
-        for nodeAIndex in range(numNodes):
-            nodeA = self.nodes[nodeAIndex]
-            for nodeBIndex in range(numNodes):
-                nodeB = self.nodes[nodeBIndex]
-                weights = self.matrix[nodeAIndex][nodeBIndex]
-                for weight in weights:
-                    self.graph.add_edge(nodeA, nodeB, weight=weight)
+        for nodeA, nodeB, weight in super()._getGraphEdges():
+            self.graph.add_edge(nodeA, nodeB, weight=weight)
 
     def printGraphProperties(self) -> None:
         print("Total number of nodes: ", int(self.graph.number_of_nodes()))
