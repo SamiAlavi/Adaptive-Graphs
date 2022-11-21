@@ -1,9 +1,9 @@
 from typing import List
-from graph import Graph
+from graph import BaseGraph
 import networkx as nx
 import matplotlib.pyplot as plt
 
-class Network(Graph):
+class NetworkX(BaseGraph):
     def __init__(self) -> None:
         super().__init__()
 
@@ -45,7 +45,7 @@ class Network(Graph):
 
 
 if (__name__ == "__main__"):
-    network = Network()
-    network.createGraph()
-    network.drawGraph()
+    graph = NetworkX()
+    graph.createGraph()
+    graph.drawGraph()
 

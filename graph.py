@@ -1,7 +1,7 @@
 import json
 from abc import ABCMeta, abstractmethod
 
-class Graph(metaclass=ABCMeta):
+class BaseGraph(metaclass=ABCMeta):
 
     def __init__(self) -> None:
         self.__readNetworkJson()
