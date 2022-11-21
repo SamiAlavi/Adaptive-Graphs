@@ -1,4 +1,4 @@
-from graph import BaseGraph
+from baseGraph import BaseGraph
 import graphviz
 
 class GraphViz(BaseGraph):

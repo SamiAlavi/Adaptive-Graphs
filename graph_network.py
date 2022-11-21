@@ -1,4 +1,4 @@
-from graph import BaseGraph
+from baseGraph import BaseGraph
 import networkx as nx
 import matplotlib.pyplot as plt
 
