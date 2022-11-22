@@ -1,34 +1,21 @@
-from graph import BaseGraph
+from baseGraph import BaseGraph
 import graphviz
 
 class GraphViz(BaseGraph):
     def __init__(self) -> None:
         super().__init__()
+        self.graph = graphviz.Digraph(comment='Graph_GraphViz')
 
     def addGraphNodes(self) -> None:
-        for node in self.nodes:
+        for node in super()._getGraphNodes():
             self.graph.node(node, node)
 
     def addGraphEdges(self) -> None:
-        numNodes = len(self.nodes)
-        for nodeAIndex in range(numNodes):
-            nodeA = self.nodes[nodeAIndex]
-            for nodeBIndex in range(numNodes):
-                nodeB = self.nodes[nodeBIndex]
-                weights = self.matrix[nodeAIndex][nodeBIndex]
-                for weight in weights:
-                    if (weight != 0):
-                        self.graph.edge(nodeA, nodeB, label=str(weight))
+        for nodeA, nodeB, weight in super()._getGraphEdges():
+            self.graph.edge(nodeA, nodeB, label=str(weight))
 
     def printGraphProperties(self) -> None:
         print(self.graph.source)
-
-    def createGraph(self) -> None:
-        self.graph = graphviz.Digraph(comment='Graph_GraphViz')
-
-        self.addGraphNodes()
-        self.addGraphEdges()
-        self.printGraphProperties()
 
     def drawGraph(self) -> None:
         # make sure graphviz is installed and is in PATH, https://www.graphviz.org/download/
@@ -37,6 +24,7 @@ class GraphViz(BaseGraph):
 
 if (__name__ == "__main__"):
     graph = GraphViz()
+    graph.readNetworkJson()
     graph.createGraph()
     graph.drawGraph()
 
