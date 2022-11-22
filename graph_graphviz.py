@@ -24,6 +24,7 @@ class GraphViz(BaseGraph):
 
 if (__name__ == "__main__"):
     graph = GraphViz()
+    graph.readNetworkJson()
     graph.createGraph()
     graph.drawGraph()
 

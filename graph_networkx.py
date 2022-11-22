@@ -33,6 +33,7 @@ class NetworkX(BaseGraph):
 
 if (__name__ == "__main__"):
     graph = NetworkX()
+    graph.readNetworkJson()
     graph.createGraph()
     graph.drawGraph()
 

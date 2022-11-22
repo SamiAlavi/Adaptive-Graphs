@@ -5,9 +5,9 @@ from typing import Generator, Tuple
 class BaseGraph(metaclass=ABCMeta):
 
     def __init__(self) -> None:
-        self.__readNetworkJson()
+        pass
 
-    def __readNetworkJson(self) -> dict:
+    def readNetworkJson(self) -> dict:
         jsonPath = "network generation/network.json"
 
         with open(jsonPath, 'r') as file:
