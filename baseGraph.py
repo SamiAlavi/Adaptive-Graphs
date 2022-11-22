@@ -28,7 +28,7 @@ class BaseGraph(metaclass=ABCMeta):
                 nodeB = self.__nodes[nodeBIndex]
                 weights = self.__matrix[nodeAIndex][nodeBIndex]
                 for weight in weights:
-                    if (weight != 0):
+                    if (weight > 0):
                         yield nodeA, nodeB, weight
 
     def createGraph(self) -> None:
