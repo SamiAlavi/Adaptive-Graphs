@@ -1,4 +1,3 @@
-from baseGraph import BaseGraph
 from graph_networkx import NetworkX
 from pyvis.network import Network
 
@@ -8,7 +7,7 @@ class Pyvis(NetworkX):
 
     def drawGraph(self) -> None:
         net = Network(height="98vh")
-        net.from_nx(self.graph)
+        net.from_nx(self.graph, show_edge_weights=True)
         net.toggle_physics(True)
         pyvisOptions = """
             options = {
@@ -19,8 +18,7 @@ class Pyvis(NetworkX):
                         }
                     },
                     "color": {
-                        "inherit": false,
-                        "color": "#000000"
+                        "inherit": true
                     },
                     "font": {
                         "strokeWidth": 0.1
