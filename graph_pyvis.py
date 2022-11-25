@@ -1,6 +1,7 @@
 from pyvis.network import Network
 from graph_networkx import NetworkX
 
+# TODO 1: Update code as necessary after package gets updated
 class Pyvis(NetworkX):
     def __init__(self) -> None:
         super().__init__()
