@@ -7,20 +7,20 @@ class NetworkX(BaseGraph):
         super().__init__()
         self.graph = nx.DiGraph()
 
-    def addGraphNodes(self) -> None:
-        for node in super()._getGraphNodes():
+    def add_graph_nodes(self) -> None:
+        for node in super()._get_graph_nodes():
             self.graph.add_node(node)
 
-    def addGraphEdges(self) -> None:
-        for nodeA, nodeB, weight in super()._getGraphEdges():
+    def add_graph_edges(self) -> None:
+        for nodeA, nodeB, weight in super()._get_graph_edges():
             self.graph.add_edge(nodeA, nodeB, weight=weight)
 
-    def printGraphProperties(self) -> None:
+    def print_graph_properties(self) -> None:
         print("Total number of nodes: ", int(self.graph.number_of_nodes()))
         print("Total number of edges: ", int(self.graph.number_of_edges()))
         print("Degree for all nodes: ", dict(self.graph.degree()))
 
-    def drawGraph(self) -> None:
+    def draw_graph(self) -> None:
         seed = 13648  # Seed random number generators for reproducibility
         pos = nx.spring_layout(self.graph, seed=seed)
         plt.figure("Graph_NetworkX", figsize=(12,7))
@@ -33,7 +33,7 @@ class NetworkX(BaseGraph):
 
 if (__name__ == "__main__"):
     graph = NetworkX()
-    graph.readNetworkJson()
-    graph.createGraph()
-    graph.drawGraph()
+    graph.read_network_json()
+    graph.create_graph()
+    graph.draw_graph()
 
