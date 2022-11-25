@@ -12,7 +12,7 @@ class BaseGraph(metaclass=ABCMeta):
 
         with open(jsonPath, 'r') as file:
             network = json.load(file)
-            
+
         self.__nodes = network["nodes"]
         self.__matrix = network["matrix"]
 
