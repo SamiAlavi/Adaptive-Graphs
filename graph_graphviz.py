@@ -1,30 +1,29 @@
-from baseGraph import BaseGraph
 import graphviz
+from graph_base import BaseGraph
 
 class GraphViz(BaseGraph):
     def __init__(self) -> None:
         super().__init__()
         self.graph = graphviz.Digraph(comment='Graph_GraphViz')
 
-    def addGraphNodes(self) -> None:
-        for node in super()._getGraphNodes():
+    def add_graph_nodes(self) -> None:
+        for node in super()._get_graph_nodes():
             self.graph.node(node, node)
 
-    def addGraphEdges(self) -> None:
-        for nodeA, nodeB, weight in super()._getGraphEdges():
-            self.graph.edge(nodeA, nodeB, label=str(weight))
+    def add_graph_edges(self) -> None:
+        for node_a, node_b, weight in super()._get_graph_edges():
+            self.graph.edge(node_a, node_b, label=str(weight))
 
-    def printGraphProperties(self) -> None:
+    def print_graph_properties(self) -> None:
         print(self.graph.source)
 
-    def drawGraph(self) -> None:
+    def draw_graph(self) -> None:
         # make sure graphviz is installed and is in PATH, https://www.graphviz.org/download/
         self.graph.render('graphs/graphviz.gv', view=True)
 
 
 if (__name__ == "__main__"):
     graph = GraphViz()
-    graph.readNetworkJson()
-    graph.createGraph()
-    graph.drawGraph()
-
+    graph.read_network_json()
+    graph.create_graph()
+    graph.draw_graph()
