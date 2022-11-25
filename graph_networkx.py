@@ -12,8 +12,8 @@ class NetworkX(BaseGraph):
             self.graph.add_node(node)
 
     def add_graph_edges(self) -> None:
-        for nodeA, nodeB, weight in super()._get_graph_edges():
-            self.graph.add_edge(nodeA, nodeB, weight=weight)
+        for node_a, node_b, weight in super()._get_graph_edges():
+            self.graph.add_edge(node_a, node_b, weight=weight)
 
     def print_graph_properties(self) -> None:
         print("Total number of nodes: ", int(self.graph.number_of_nodes()))
@@ -25,8 +25,8 @@ class NetworkX(BaseGraph):
         pos = nx.spring_layout(self.graph, seed=seed)
         plt.figure("Graph_NetworkX", figsize=(12,7))
         nx.draw(self.graph, pos, edge_color='black', width=1, linewidths=1, alpha=0.9, with_labels=True)
-        edgeLabels = nx.get_edge_attributes(self.graph, 'weight')
-        nx.draw_networkx_edge_labels(self.graph, pos, edge_labels=edgeLabels, font_color='red', font_family="arial")
+        edge_labels = nx.get_edge_attributes(self.graph, 'weight')
+        nx.draw_networkx_edge_labels(self.graph, pos, edge_labels=edge_labels, font_color='red', font_family="arial")
         plt.axis('off')
         plt.show()
 

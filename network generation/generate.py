@@ -3,13 +3,13 @@ import json
 import numpy as np
 
 def column_to_excel(col): # col is 1 based
-    excelCol = str()
+    excel_col = str()
     div = col 
     while div:
         (div, mod) = divmod(div-1, 26) # will return (x, 0 .. 25)
-        excelCol = ascii_uppercase[mod] + excelCol
+        excel_col = ascii_uppercase[mod] + excel_col
 
-    return excelCol
+    return excel_col
 from typing import List
 
 def generate_column_names(numCols: int) -> List[str]:
@@ -45,14 +45,14 @@ def write_json(nodes: List[str], matrix: List[List[List[int]]], minifyJson: bool
         json.dump(data, file, indent=indent)
 
 def print_example(nodes: List[str], matrix: List[List[List[int]]]):
-    nodeAIndex = 0
-    nodeBIndex = 1
+    node_a_index = 0
+    node_b_index = 1
 
-    nodeA = nodes[nodeAIndex]
-    nodeB = nodes[nodeBIndex]
-    edges = matrix[nodeAIndex][nodeBIndex]
+    node_a = nodes[node_a_index]
+    node_b = nodes[node_b_index]
+    edges = matrix[node_a_index][node_b_index]
 
-    print(f'Edges from ({nodeA}) to ({nodeB}) are of weights: {edges} (0 means no edge)')
+    print(f'Edges from ({node_a}) to ({node_b}) are of weights: {edges} (0 means no edge)')
 
 def generate_dataset(numNodes: int, maxConnectionsBetweenNodes: int, minifyJson: bool):
     nodes = generate_column_names(numNodes)

@@ -8,9 +8,9 @@ class BaseGraph(metaclass=ABCMeta):
         pass
 
     def read_network_json(self) -> dict:
-        jsonPath = "network generation/network.json"
+        json_path = "network generation/network.json"
 
-        with open(jsonPath, 'r') as file:
+        with open(json_path, 'r') as file:
             network = json.load(file)
 
         self.__nodes = network["nodes"]
@@ -21,23 +21,23 @@ class BaseGraph(metaclass=ABCMeta):
             yield node
 
     def _get_graph_edges(self) -> Generator[Tuple[str, str, int], None, None]:
-        numNodes = len(self.__nodes)
-        for nodeAIndex in range(numNodes):
-            nodeA = self.__nodes[nodeAIndex]
-            for nodeBIndex in range(numNodes):
-                nodeB = self.__nodes[nodeBIndex]
-                weights = self.__matrix[nodeAIndex][nodeBIndex]
+        num_nodes = len(self.__nodes)
+        for node_a_index in range(num_nodes):
+            node_a = self.__nodes[node_a_index]
+            for node_b_index in range(num_nodes):
+                node_b = self.__nodes[node_b_index]
+                weights = self.__matrix[node_a_index][node_b_index]
                 for weight in weights:
                     if (weight > 0):
-                        yield nodeA, nodeB, weight
+                        yield node_a, node_b, weight
 
     def create_graph(self) -> None:
         try:
             self.add_graph_nodes()
             self.add_graph_edges()
             self.print_graph_properties()
-        except Exception as e:
-            print(str(e))
+        except Exception as exception:
+            print(str(exception))
 
     @abstractmethod
     def add_graph_nodes(self) -> None:
