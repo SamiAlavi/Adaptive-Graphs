@@ -3,7 +3,7 @@ from string import ascii_uppercase
 import json
 import numpy as np
 
-def column_to_excel(col): # col is 1 based
+def column_to_excel(col) -> str: # col is 1 based
     excel_col = str()
     div = col
     while div:
@@ -34,17 +34,17 @@ def generate_matrix(num_nodes: int, max_connections_between_nodes: int) -> List[
 
     return matrix
 
-def write_json(nodes: List[str], matrix: List[List[List[int]]], minify_json: bool):
+def write_json(nodes: List[str], matrix: List[List[List[int]]], minify_json: bool) -> None:
     data = {
         'nodes': nodes,
         'matrix': matrix.tolist()
     }
     indent = None if minify_json else 4
 
-    with open("network.json", "w") as file:
+    with open("network.json", "w", encoding="utf-8") as file:
         json.dump(data, file, indent=indent)
 
-def print_example(nodes: List[str], matrix: List[List[List[int]]]):
+def print_example(nodes: List[str], matrix: List[List[List[int]]]) -> None:
     node_a_index = 0
     node_b_index = 1
 
@@ -54,7 +54,7 @@ def print_example(nodes: List[str], matrix: List[List[List[int]]]):
 
     print(f'Edges from ({node_a}) to ({node_b}) are of weights: {edges} (0 means no edge)')
 
-def generate_dataset(num_nodes: int, max_connections_between_nodes: int, minify_json: bool):
+def generate_dataset(num_nodes: int, max_connections_between_nodes: int, minify_json: bool) -> None:
     nodes = generate_column_names(num_nodes)
     matrix = generate_matrix(num_nodes, max_connections_between_nodes)
     write_json(nodes, matrix, minify_json)

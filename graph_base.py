@@ -5,12 +5,13 @@ from typing import Generator, Tuple
 class BaseGraph(metaclass=ABCMeta):
 
     def __init__(self) -> None:
-        pass
+        self.__nodes = []
+        self.__matrix = []
 
     def read_network_json(self) -> dict:
         json_path = "network generation/network.json"
 
-        with open(json_path, 'r') as file:
+        with open(json_path, "r", encoding="utf-8") as file:
             network = json.load(file)
 
         self.__nodes = network["nodes"]
@@ -32,12 +33,9 @@ class BaseGraph(metaclass=ABCMeta):
                         yield node_a, node_b, weight
 
     def create_graph(self) -> None:
-        try:
-            self.add_graph_nodes()
-            self.add_graph_edges()
-            self.print_graph_properties()
-        except Exception as exception:
-            print(str(exception))
+        self.add_graph_nodes()
+        self.add_graph_edges()
+        self.print_graph_properties()
 
     @abstractmethod
     def add_graph_nodes(self) -> None:
