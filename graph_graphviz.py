@@ -27,4 +27,3 @@ if (__name__ == "__main__"):
     graph.read_network_json()
     graph.create_graph()
     graph.draw_graph()
-

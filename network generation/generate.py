@@ -5,7 +5,7 @@ import numpy as np
 
 def column_to_excel(col): # col is 1 based
     excel_col = str()
-    div = col 
+    div = col
     while div:
         (div, mod) = divmod(div-1, 26) # will return (x, 0 .. 25)
         excel_col = ascii_uppercase[mod] + excel_col
