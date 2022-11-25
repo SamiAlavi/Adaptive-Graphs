@@ -1,15 +1,15 @@
-from graph_networkx import NetworkX
 from pyvis.network import Network
+from graph_networkx import NetworkX
 
 class Pyvis(NetworkX):
     def __init__(self) -> None:
         super().__init__()
         self.net = Network(height="98vh")
 
-    def drawGraph(self) -> None:
+    def draw_graph(self) -> None:
         self.net.from_nx(self.graph, show_edge_weights=True)
         self.net.toggle_physics(True)
-        pyvisOptions = """
+        pyvis_options = """
             options = {
                 "edges": {
                     "arrows": {
@@ -39,15 +39,14 @@ class Pyvis(NetworkX):
                 }
             }
         """
-        self.net.set_options(pyvisOptions)
+        self.net.set_options(pyvis_options)
         #net.show_buttons()
-        fileName = "graphs/Graph_Pyvis.html"
-        self.net.show(fileName)
+        file_name = "graphs/Graph_Pyvis.html"
+        self.net.show(file_name)
 
 
 if (__name__ == "__main__"):
     graph = Pyvis()
     graph.readNetworkJson()
     graph.createGraph()
-    graph.drawGraph()
-
+    graph.draw_graph()
