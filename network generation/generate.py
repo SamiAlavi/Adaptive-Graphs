@@ -12,34 +12,34 @@ def column_to_excel(col): # col is 1 based
     return excel_col
 from typing import List
 
-def generate_column_names(numCols: int) -> List[str]:
+def generate_column_names(num_columns: int) -> List[str]:
     titles = list(ascii_uppercase)
 
-    if (numCols <= 26):
-        return titles[:numCols]
+    if (num_columns <= 26):
+        return titles[:num_columns]
 
-    numCols-=26
+    num_columns-=26
     times = 0
 
-    while (numCols > 0):
-        sublist = [titles[times]+char for char in ascii_uppercase][:numCols]
+    while (num_columns > 0):
+        sublist = [titles[times]+char for char in ascii_uppercase][:num_columns]
         titles.extend(sublist)
-        numCols-=26
+        num_columns-=26
         times+=1
 
     return titles
 
-def generate_matrix(numNodes: int, maxConnectionsBetweenNodes: int) -> List[List[List[int]]]:
-    matrix = np.random.randint(0, 10, (numNodes, numNodes, maxConnectionsBetweenNodes))
+def generate_matrix(num_nodes: int, max_connections_between_nodes: int) -> List[List[List[int]]]:
+    matrix = np.random.randint(0, 10, (num_nodes, num_nodes, max_connections_between_nodes))
 
     return matrix
 
-def write_json(nodes: List[str], matrix: List[List[List[int]]], minifyJson: bool):
+def write_json(nodes: List[str], matrix: List[List[List[int]]], minify_json: bool):
     data = {
         'nodes': nodes,
         'matrix': matrix.tolist()
     }
-    indent = None if minifyJson else 4
+    indent = None if minify_json else 4
 
     with open("network.json", "w") as file:
         json.dump(data, file, indent=indent)
@@ -54,10 +54,10 @@ def print_example(nodes: List[str], matrix: List[List[List[int]]]):
 
     print(f'Edges from ({node_a}) to ({node_b}) are of weights: {edges} (0 means no edge)')
 
-def generate_dataset(numNodes: int, maxConnectionsBetweenNodes: int, minifyJson: bool):
-    nodes = generate_column_names(numNodes)
-    matrix = generate_matrix(numNodes, maxConnectionsBetweenNodes)
-    write_json(nodes, matrix, minifyJson)
+def generate_dataset(num_nodes: int, max_connections_between_nodes: int, minify_json: bool):
+    nodes = generate_column_names(num_nodes)
+    matrix = generate_matrix(num_nodes, max_connections_between_nodes)
+    write_json(nodes, matrix, minify_json)
     print_example(nodes, matrix)
 
 if (__name__ == "__main__"):
