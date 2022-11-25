@@ -4,11 +4,11 @@ from pyvis.network import Network
 class Pyvis(NetworkX):
     def __init__(self) -> None:
         super().__init__()
+        self.net = Network(height="98vh")
 
     def drawGraph(self) -> None:
-        net = Network(height="98vh")
-        net.from_nx(self.graph, show_edge_weights=True)
-        net.toggle_physics(True)
+        self.net.from_nx(self.graph, show_edge_weights=True)
+        self.net.toggle_physics(True)
         pyvisOptions = """
             options = {
                 "edges": {
@@ -39,10 +39,10 @@ class Pyvis(NetworkX):
                 }
             }
         """
-        net.set_options(pyvisOptions)
+        self.net.set_options(pyvisOptions)
         #net.show_buttons()
         fileName = "graphs/Graph_Pyvis.html"
-        net.show(fileName)
+        self.net.show(fileName)
 
 
 if (__name__ == "__main__"):
