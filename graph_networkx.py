@@ -1,6 +1,6 @@
-from graph_base import BaseGraph
 import networkx as nx
 import matplotlib.pyplot as plt
+from graph_base import BaseGraph
 
 class NetworkX(BaseGraph):
     def __init__(self) -> None:

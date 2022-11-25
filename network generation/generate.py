@@ -1,3 +1,4 @@
+from typing import List
 from string import ascii_uppercase
 import json
 import numpy as np
@@ -10,7 +11,6 @@ def column_to_excel(col): # col is 1 based
         excel_col = ascii_uppercase[mod] + excel_col
 
     return excel_col
-from typing import List
 
 def generate_column_names(num_columns: int) -> List[str]:
     titles = list(ascii_uppercase)

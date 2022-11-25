@@ -1,5 +1,5 @@
-from graph_base import BaseGraph
 import graphviz
+from graph_base import BaseGraph
 
 class GraphViz(BaseGraph):
     def __init__(self) -> None:
