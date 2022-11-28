@@ -69,10 +69,9 @@ def create_graphjson(nodes: List[str], matrix: List[List[List[int]]], minify_jso
     }
     for node in nodes:
         graph_json["graph"]["nodes"][node] = {
-            "label": f"node label({node})",
+            "label": f"{node}",
             "metadata": {
                 "type": "node type",
-                "user-defined": "values"
             }
         }
     for node_a, node_b, weight in get_graph_edges(nodes, matrix):
@@ -81,9 +80,9 @@ def create_graphjson(nodes: List[str], matrix: List[List[List[int]]], minify_jso
             "relation": "edge relationship",
             "target": f"{node_b}",
             "directed": True,
-            "label": f"edge weight({weight})",
+            "label": f"{weight}",
             "metadata": {
-                "user-defined": "values"
+                "type": "edge type",
             }
         }
         graph_json["graph"]["edges"].append(edge)
