@@ -67,7 +67,7 @@ def create_graphjson(nodes: List[str], matrix: List[List[List[int]]], minify_jso
         }
     }
     for node in nodes:
-        graph_json["graph"][node] = {
+        graph_json["graph"]["nodes"][node] = {
             "label": f"node label({node})",
             "metadata": {
                 "type": "node type",
