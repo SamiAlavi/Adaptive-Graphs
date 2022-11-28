@@ -2,6 +2,7 @@ from typing import Generator, List, Tuple
 from string import ascii_uppercase
 import json
 import numpy as np
+from jsonschema import validate
 
 def column_to_excel(col) -> str: # col is 1 based
     excel_col = str()
@@ -86,6 +87,11 @@ def create_graphjson(nodes: List[str], matrix: List[List[List[int]]], minify_jso
             }
         }
         graph_json["graph"]["edges"].append(edge)
+
+    with open("json-graph-schema.json", "r", encoding="utf-8") as file:
+        schema = json.load(file)
+        
+    validate(instance=graph_json, schema=schema)
 
     indent = None if minify_json else 4
 
