@@ -97,6 +97,41 @@ def create_graphjson(nodes: List[str], matrix: List[List[List[int]]], minify_jso
     with open("network_graphjson.json", "w", encoding="utf-8") as file:
         json.dump(graph_json, file, indent=indent)
 
+def create_gml(nodes: List[str], matrix: List[List[List[int]]]) -> None:
+    gml_nodes = []
+    gml_edges = []
+
+    node_ids = {}
+    for id, node in enumerate(nodes):
+        node_ids[node] = id
+        gml_node = f"""node
+        [
+            id {id}
+            label "{node}"
+        ]
+        """
+        gml_nodes.append(gml_node)
+
+    for node_a, node_b, weight in get_graph_edges(nodes, matrix):
+        gml_edge = f"""edge
+        [
+            source {node_ids[node_a]}
+            target {node_ids[node_b]}
+            label "{weight}"
+            id "({node_a} -> {node_b})"
+        ]
+        """
+        gml_edges.append(gml_edge)
+
+    gml = f"""graph[
+        directed 1
+        {''.join(gml_nodes)}
+        {''.join(gml_edges)}
+    ]"""
+
+    with open("network_gml.gml", "w", encoding="utf-8") as file:
+        file.write(gml)
+
 def print_example(nodes: List[str], matrix: List[List[List[int]]]) -> None:
     node_a_index = 0
     node_b_index = 1
@@ -112,6 +147,7 @@ def generate_dataset(num_nodes: int, max_connections_between_nodes: int, minify_
     matrix = generate_matrix(num_nodes, max_connections_between_nodes)
     write_json(nodes, matrix, minify_json)
     create_graphjson(nodes, matrix, minify_json)
+    create_gml(nodes, matrix)
     print_example(nodes, matrix)
 
 if (__name__ == "__main__"):
