@@ -7,7 +7,7 @@
       "python.defaultInterpreterPath": "${workspaceFolder}\\..\\python.exe",
       "python.analysis.autoImportCompletions": true,
       "python.analysis.completeFunctionParens": true,
-      "python.analysis.inlayHints.functionReturnTypes": true,
+      "python.analysis.inlayHints.functionReturnTypes": false,
       "python.analysis.inlayHints.variableTypes": false,
       "python.analysis.typeCheckingMode": "off",
       "python.analysis.extraPaths": ["${workspaceFolder}\\..\\..\\Lib\\site-packages"]

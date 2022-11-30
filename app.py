@@ -1,4 +1,10 @@
 from flask import Flask, request
+from typing import Any
+from graph_networkx import NetworkX
+
+from flask import Response
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+import io
 
 app = Flask(__name__)
 
@@ -15,3 +21,15 @@ def before_request_callback():
 @app.route("/", methods = ['GET'])
 def home() -> str:
     return "Hello, Flask!"
+
+@app.route("/api/networkx", methods = ['POST'])
+def networkx() -> Any:
+    json = request.json
+    graph = NetworkX()
+    graph.read_network_json(json)
+    graph.create_graph()
+    fig = graph.draw_graph()
+    output = io.BytesIO()
+    FigureCanvas(fig).print_png(output)
+    response = output.getvalue()
+    return Response(response, mimetype='image/png')

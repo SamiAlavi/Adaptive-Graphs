@@ -23,16 +23,18 @@ class NetworkX(BaseGraph):
     def draw_graph(self) -> None:
         seed = 13648  # Seed random number generators for reproducibility
         pos = nx.spring_layout(self.graph, seed=seed)
-        plt.figure("Graph_NetworkX", figsize=(12,7))
+        fig = plt.figure("Graph_NetworkX", figsize=(12,7))
         nx.draw(self.graph, pos, edge_color='black', width=1, linewidths=1, alpha=0.9, with_labels=True)
         edge_labels = nx.get_edge_attributes(self.graph, 'weight')
         nx.draw_networkx_edge_labels(self.graph, pos, edge_labels=edge_labels, font_color='red', font_family="arial")
         plt.axis('off')
-        plt.show()
+        # plt.show()
+        return fig
 
 
 if (__name__ == "__main__"):
     graph = NetworkX()
     graph.read_network_json()
     graph.create_graph()
-    graph.draw_graph()
+    fig = graph.draw_graph()
+    plt.show()

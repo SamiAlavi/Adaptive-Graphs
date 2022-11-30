@@ -1,6 +1,6 @@
 import json
 from abc import ABCMeta, abstractmethod
-from typing import Generator, Tuple
+from typing import Any, Generator, Tuple
 
 class BaseGraph(metaclass=ABCMeta):
 
@@ -8,11 +8,12 @@ class BaseGraph(metaclass=ABCMeta):
         self.__nodes = []
         self.__matrix = []
 
-    def read_network_json(self) -> dict:
-        json_path = "network generation/network.json"
+    def read_network_json(self, network=None) -> dict:
+        if (not network):
+            json_path = "network generation/network.json"
 
-        with open(json_path, "r", encoding="utf-8") as file:
-            network = json.load(file)
+            with open(json_path, "r", encoding="utf-8") as file:
+                network = json.load(file)
 
         self.__nodes = network["nodes"]
         self.__matrix = network["matrix"]
@@ -50,5 +51,5 @@ class BaseGraph(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def draw_graph(self) -> None:
+    def draw_graph(self) -> Any:
         pass
