@@ -89,7 +89,7 @@ def create_graphjson(nodes: List[str], matrix: List[List[List[int]]], minify_jso
 
     with open("json-graph-schema.json", "r", encoding="utf-8") as file:
         schema = json.load(file)
-        
+
     validate(instance=graph_json, schema=schema)
 
     indent = None if minify_json else 4
@@ -102,12 +102,12 @@ def create_gml(nodes: List[str], matrix: List[List[List[int]]]) -> None:
     gml_edges = []
 
     node_ids = {}
-    for id, node in enumerate(nodes):
-        node_ids[node] = id
+    for node_id, node_name in enumerate(nodes):
+        node_ids[node_name] = node_id
         gml_node = f"""node
         [
-            id {id}
-            label "{node}"
+            id {node_id}
+            label "{node_name}"
         ]
         """
         gml_nodes.append(gml_node)
