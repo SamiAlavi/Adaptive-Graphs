@@ -1,4 +1,5 @@
 import graphviz
+import base64
 from graph_base import BaseGraph
 
 class GraphViz(BaseGraph):
@@ -20,6 +21,11 @@ class GraphViz(BaseGraph):
     def draw_graph(self) -> None:
         # make sure graphviz is installed and is in PATH, https://www.graphviz.org/download/
         self.graph.render('graphs/graphviz.gv', view=True)
+
+    def get_graph_image(self) -> str:
+        graph_output = self.graph.pipe(format='png')
+        data = base64.b64encode(graph_output).decode('utf-8')
+        return f"<img src='data:image/png;base64,{data}'/>"
 
 
 if (__name__ == "__main__"):

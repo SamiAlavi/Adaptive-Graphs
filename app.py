@@ -1,6 +1,7 @@
 from flask import Flask, request, Response
 import json
 from graph_networkx import NetworkX
+from graph_graphviz import GraphViz
 
 app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS'] = True
@@ -62,6 +63,14 @@ def networkx() -> str:
     graph.create_graph()
     fig = graph.draw_graph()
     image_html = graph.get_graph_image(fig)
+    return image_html
+
+@app.route("/graph/graphviz", methods=['POST'])
+def graphviz() -> str:
+    graph = GraphViz()
+    graph.read_network_json(request.json)
+    graph.create_graph()
+    image_html = graph.get_graph_image()
     return image_html
 
 app.register_error_handler(401, error_401_handler)
