@@ -4,6 +4,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
+import numpy as np
 from graph_base import BaseGraph
 
 class NetworkX(BaseGraph):
@@ -117,8 +118,6 @@ class NetworkX(BaseGraph):
         draw_networkx_edges
         draw_networkx_labels
         """
-        import matplotlib.pyplot as plt
-        import numpy as np
 
         if ax is None:
             ax = plt.gca()
@@ -144,6 +143,9 @@ class NetworkX(BaseGraph):
             ctrl_mid_2 = 0.5*pos_2 + 0.5*ctrl_1
             bezier_mid = 0.5*ctrl_mid_1 + 0.5*ctrl_mid_2
             (x, y) = ax.transData.inverted().transform(bezier_mid)
+
+            if (n1 == n2):
+                y+=0.1
 
             if rotate:
                 # in degrees
@@ -200,8 +202,9 @@ class NetworkX(BaseGraph):
     def draw_graph(self) -> Any:
         seed = 13648  # Seed random number generators for reproducibility
         arc_rad = 0.25
+        bbox = dict(boxstyle="round", ec=(1.0, 1.0, 1.0), fc=(1.0, 1.0, 1.0), alpha=0.5)
 
-        fig = plt.figure("Graph_NetworkX", figsize=(12,7))        
+        fig = plt.figure("Graph_NetworkX", figsize=(20,20))        
         pos = nx.spring_layout(self.graph, seed=seed)        
         nx.draw_networkx_nodes(self.graph, pos)
         nx.draw_networkx_labels(self.graph, pos)
@@ -210,19 +213,19 @@ class NetworkX(BaseGraph):
         curved_edges = [edge for edge in edges if reversed(edge) in edges]
         straight_edges = list(set(edges) - set(curved_edges))
         nx.draw_networkx_edges(self.graph, pos, edgelist=straight_edges, alpha=0.9)
-        nx.draw_networkx_edges(self.graph, pos, edgelist=curved_edges, alpha=0.9, connectionstyle=f'arc3, rad = {arc_rad}')
+        nx.draw_networkx_edges(self.graph, pos, edgelist=curved_edges, alpha=0.5, connectionstyle=f'arc3, rad = {arc_rad}')
 
         edge_weights = nx.get_edge_attributes(self.graph, 'label')
         curved_edge_labels = {edge: edge_weights[edge] for edge in curved_edges}
         straight_edge_labels = {edge: edge_weights[edge] for edge in straight_edges}
-        self.my_draw_networkx_edge_labels(self.graph, pos, edge_labels=curved_edge_labels,rotate=False, font_color='red', alpha=0.9, rad=arc_rad)
-        nx.draw_networkx_edge_labels(self.graph, pos, edge_labels=straight_edge_labels,rotate=False, font_color='red', alpha=0.9)
+        self.my_draw_networkx_edge_labels(self.graph, pos, edge_labels=curved_edge_labels,rotate=False, font_color='red', alpha=0.9, bbox=bbox, rad=arc_rad)
+        nx.draw_networkx_edge_labels(self.graph, pos, edge_labels=straight_edge_labels,rotate=False, font_color='red', alpha=0.9, bbox=bbox)
 
         return fig
 
     def get_graph_image(self, fig) -> str:
         img = BytesIO()
-        fig.savefig(img, format="png")
+        fig.savefig(img, bbox_inches='tight', pad_inches=0, format="png")
         img.seek(0) # writing moved the cursor to the end of the file, reset
         plt.clf() # clear pyplot
         data = base64.b64encode(img.getbuffer()).decode("ascii") # Embed the result in the html output.
