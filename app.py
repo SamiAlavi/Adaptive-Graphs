@@ -2,10 +2,6 @@ from flask import Flask, request
 from typing import Any
 from graph_networkx import NetworkX
 
-from flask import Response
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-import io
-
 app = Flask(__name__)
 
 @app.before_request 
@@ -23,13 +19,13 @@ def home() -> str:
     return "Hello, Flask!"
 
 @app.route("/api/networkx", methods = ['POST'])
-def networkx() -> Any:
-    json = request.json
+def networkx() -> str:
     graph = NetworkX()
-    graph.read_network_json(json)
+    graph.read_network_json(request.json)
     graph.create_graph()
     fig = graph.draw_graph()
-    output = io.BytesIO()
-    FigureCanvas(fig).print_png(output)
-    response = output.getvalue()
-    return Response(response, mimetype='image/png')
+    image_html = graph.get_graph_image(fig)
+    return image_html
+
+if __name__ == '__main__':
+    app.run(debug=False)
