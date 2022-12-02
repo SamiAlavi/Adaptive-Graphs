@@ -25,7 +25,7 @@ class GraphViz(BaseGraph):
     def get_graph_image(self) -> str:
         graph_output = self.graph.pipe(format='png')
         data = base64.b64encode(graph_output).decode('utf-8')
-        return f"<img src='data:image/png;base64,{data}'/>"
+        return f"data:image/png;base64,{data}"
 
 
 if (__name__ == "__main__"):

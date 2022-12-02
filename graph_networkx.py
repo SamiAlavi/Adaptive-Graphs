@@ -229,7 +229,7 @@ class NetworkX(BaseGraph):
         img.seek(0) # writing moved the cursor to the end of the file, reset
         plt.clf() # clear pyplot
         data = base64.b64encode(img.getbuffer()).decode("ascii") # Embed the result in the html output.
-        return f"<img src='data:image/png;base64,{data}'/>"
+        return f"data:image/png;base64,{data}"
 
 if (__name__ == "__main__"):
     graph = NetworkX()
