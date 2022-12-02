@@ -7,7 +7,8 @@ class Pyvis(NetworkX):
         super().__init__()
         self.network = Network(height="98vh")
 
-    def draw_graph(self) -> None:
+    def create_graph(self) -> None:
+        super().create_graph()
         self.network.from_nx(self.graph, show_edge_weights=True)
         self.network.toggle_physics(True)
         pyvis_options = """
@@ -42,8 +43,12 @@ class Pyvis(NetworkX):
         """
         self.network.set_options(pyvis_options)
         #net.show_buttons()
-        file_name = "graphs/Graph_Pyvis.html"
-        self.network.show(file_name)
+
+    def draw_graph(self) -> None:
+        from os import getcwd
+        file_path = f"{getcwd()}/graphs/Graph_Pyvis.html"
+        self.network.write_html(file_path)
+        self.network.show(file_path)
 
 
 if (__name__ == "__main__"):
