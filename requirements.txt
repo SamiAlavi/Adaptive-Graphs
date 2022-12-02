@@ -1,5 +1,5 @@
 networkx == 2.8.8
 matplotlib == 3.6.2
 graphviz == 0.20.1
-git+https://github.com/SamiAlavi/pyvis.git@master#egg=pyvis
+https://github.com/SamiAlavi/pyvis/releases/download/v0.3.2/pyvis-0.3.2.tar.gz
 pylint == 2.15.6
