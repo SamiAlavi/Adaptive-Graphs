@@ -50,6 +50,9 @@ class Pyvis(NetworkX):
         self.network.write_html(file_path)
         self.network.show(file_path)
 
+    def get_graph_data(self, fig) -> str:
+        pass
+
 
 if (__name__ == "__main__"):
     graph = Pyvis()

@@ -51,5 +51,9 @@ class BaseGraph(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def draw_graph(self) -> Any:
+    def draw_graph(self) -> None:
+        pass
+
+    @abstractmethod
+    def get_graph_data(self) -> str:
         pass

@@ -61,8 +61,8 @@ def networkx() -> str:
     graph = NetworkX()
     graph.read_network_json(request.json)
     graph.create_graph()
-    fig = graph.draw_graph()
-    image_base64 = graph.get_graph_image(fig)
+    graph.draw_graph()
+    image_base64 = graph.get_graph_data()
     return image_base64
 
 @app.route("/graph/graphviz", methods=['POST'])
@@ -70,7 +70,7 @@ def graphviz() -> str:
     graph = GraphViz()
     graph.read_network_json(request.json)
     graph.create_graph()
-    image_base64 = graph.get_graph_image()
+    image_base64 = graph.get_graph_data()
     return image_base64
 
 app.register_error_handler(401, error_401_handler)

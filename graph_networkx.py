@@ -199,12 +199,12 @@ class NetworkX(BaseGraph):
         return text_items
 
 
-    def draw_graph(self) -> Any:
+    def draw_graph(self) -> None:
         seed = 13648  # Seed random number generators for reproducibility
         arc_rad = 0.25
         bbox = dict(boxstyle="round", ec=(1.0, 1.0, 1.0), fc=(1.0, 1.0, 1.0), alpha=0.5)
 
-        fig = plt.figure("Graph_NetworkX", figsize=(20,20))        
+        self.fig = plt.figure("Graph_NetworkX", figsize=(20,20))        
         pos = nx.spring_layout(self.graph, seed=seed)        
         nx.draw_networkx_nodes(self.graph, pos)
         nx.draw_networkx_labels(self.graph, pos)
@@ -221,11 +221,9 @@ class NetworkX(BaseGraph):
         self.my_draw_networkx_edge_labels(self.graph, pos, edge_labels=curved_edge_labels,rotate=False, font_color='red', alpha=0.9, bbox=bbox, rad=arc_rad)
         nx.draw_networkx_edge_labels(self.graph, pos, edge_labels=straight_edge_labels,rotate=False, font_color='red', alpha=0.9, bbox=bbox)
 
-        return fig
-
-    def get_graph_image(self, fig) -> str:
+    def get_graph_data(self) -> str:
         img = BytesIO()
-        fig.savefig(img, bbox_inches='tight', pad_inches=0, format="png")
+        self.fig.savefig(img, bbox_inches='tight', pad_inches=0, format="png")
         img.seek(0) # writing moved the cursor to the end of the file, reset
         plt.clf() # clear pyplot
         data = base64.b64encode(img.getbuffer()).decode("ascii") # Embed the result in the html output.
