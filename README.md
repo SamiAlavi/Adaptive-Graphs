@@ -4,7 +4,9 @@ Web Engineering Seminar
  
 # Installation
 
-**Note: This project is using [pip](https://pypi.org/project/pip/)**
+**Note: This project is using:**
+- [Python 3.10](https://www.python.org/downloads/release/python-3100/)
+- [pip](https://pypi.org/project/pip/)
 
 Installing the dependencies of the main project, run following command:
 
