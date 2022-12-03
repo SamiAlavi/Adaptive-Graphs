@@ -3,6 +3,7 @@ import json
 from graph_networkx import NetworkX
 from graph_graphviz import GraphViz
 from graph_pyvis import Pyvis
+from parser_standards import Parser
 
 app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS'] = True
@@ -31,6 +32,8 @@ def before_request_callback():
         error_message = validate_graph()
         if (error_message):
             return error_response(400, error_message)
+    elif (path.startswith("/parse")):
+        pass
 
 def validate_graph() -> str:
     graph_content_type = 'application/json'
@@ -81,6 +84,10 @@ def pyvis() -> str:
     graph.create_graph()
     image_html = graph.get_graph_data()
     return image_html
+
+@app.route("/parse/gml", methods=['POST'])
+def parse_gml() -> str:
+    return Parser.parse_gml(request.data)
 
 app.register_error_handler(401, error_401_handler)
 
