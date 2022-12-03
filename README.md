@@ -37,15 +37,36 @@ Sample Request Body
 }
 </pre>
 
-### NetworkX
-
-- POST Method
-- /graph/networkx
-
-### Graphviz
-
-- POST Method
-- /graph/graphviz
+<table border="1">
+    <tr>
+        <td>Library</td>
+        <td>Method</td>
+        <td>Route</td>
+        <td>Request</td>
+        <td>Response</td>
+    </tr>
+    <tr>
+        <td>NetworkX</td>
+        <td>POST</td>
+        <td>/graph/networkx</td>
+        <td>JSON</td>
+        <td>Image base64</td>
+    </tr>
+    <tr>
+        <td>Graphviz</td>
+        <td>POST</td>
+        <td>/graph/graphviz</td>
+        <td>JSON</td>
+        <td>Image base64</td>
+    </tr>
+    <tr>
+        <td>Pyvis</td>
+        <td>POST</td>
+        <td>/graph/pyvis</td>
+        <td>JSON</td>
+        <td>HTML page</td>
+    </tr>
+</table>
 
 # Run Individual Files
 
