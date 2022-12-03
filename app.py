@@ -2,6 +2,7 @@ from flask import Flask, request, Response
 import json
 from graph_networkx import NetworkX
 from graph_graphviz import GraphViz
+from graph_pyvis import Pyvis
 
 app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS'] = True
@@ -72,6 +73,14 @@ def graphviz() -> str:
     graph.create_graph()
     image_base64 = graph.get_graph_data()
     return image_base64
+
+@app.route("/graph/pyvis", methods=['POST'])
+def pyvis() -> str:
+    graph = Pyvis()
+    graph.read_network_json(request.json)
+    graph.create_graph()
+    image_html = graph.get_graph_data()
+    return image_html
 
 app.register_error_handler(401, error_401_handler)
 
