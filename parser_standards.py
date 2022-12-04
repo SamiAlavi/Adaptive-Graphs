@@ -9,6 +9,10 @@ class Parser():
         pass
 
     @staticmethod
+    def bytes_to_string(bytes: bytes):
+        return bytes.decode()
+
+    @staticmethod
     def write_to_temp_file(string_bytes: bytes) -> str:
         temp =  tempfile.NamedTemporaryFile(prefix='_ADG_', suffix='.adg', delete=False)
         temp.write(string_bytes)
@@ -39,9 +43,11 @@ class Parser():
 
     @staticmethod
     def parse_gml(gml: bytes) -> object:
-        temp_filepath = Parser.write_to_temp_file(gml)
-        graph = nx.read_gml(temp_filepath)
-        Parser.remove_file(temp_filepath)
+        gml_str = Parser.bytes_to_string(gml)
+        #temp_filepath = Parser.write_to_temp_file(gml)
+        graph = nx.parse_gml(gml_str)
+        del(gml)
+        #Parser.remove_file(temp_filepath)
         nodes = list(graph.nodes)
         #edges = list(graph.edges)
         labels = nx.get_edge_attributes(graph, 'label')
