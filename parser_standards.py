@@ -24,7 +24,7 @@ class Parser():
     @staticmethod
     def gml_labels_to_matrix(nodes: List[str], labels: object) -> List[List[List[int]]]:
         num_nodes = len(nodes)
-        matrix = np.zeros((num_nodes, num_nodes), dtype=int).tolist()
+        matrix = np.zeros((num_nodes, num_nodes, 0), dtype=int).tolist()
 
         for (node_A, node_B), label in labels.items():
             node_A_index = nodes.index(node_A)
