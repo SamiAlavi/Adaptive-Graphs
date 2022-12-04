@@ -89,6 +89,10 @@ def pyvis() -> str:
 def parse_gml() -> str:
     return Parser.parse_gml(request.data)
 
+@app.route("/parse/graphml", methods=['POST'])
+def parse_graphml() -> str:
+    return Parser.parse_graphml(request.data)
+
 app.register_error_handler(401, error_401_handler)
 
 if __name__ == '__main__':

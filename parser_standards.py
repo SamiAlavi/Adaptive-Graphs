@@ -58,4 +58,22 @@ class Parser():
             "matrix": matrix
         }
         return obj
+
+    @staticmethod
+    def parse_graphml(graphml: bytes) -> object:
+        graphml_str = Parser.bytes_to_string(graphml)
+        #temp_filepath = Parser.write_to_temp_file(graphml)
+        graph = nx.parse_graphml(graphml_str)
+        del(graphml)
+        #Parser.remove_file(temp_filepath)
+        nodes = list(graph.nodes)
+        #edges = list(graph.edges)
+        labels = nx.get_edge_attributes(graph, 'label')
+        matrix = Parser.gml_labels_to_matrix(nodes, labels)
+        
+        obj = {
+            "nodes": nodes,
+            "matrix": matrix
+        }
+        return obj
     
