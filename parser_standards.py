@@ -26,7 +26,7 @@ class Parser():
             remove(file_path)
 
     @staticmethod
-    def gml_labels_to_matrix(nodes: List[str], labels: object) -> List[List[List[int]]]:
+    def networkx_labels_to_matrix(nodes: List[str], labels: object) -> List[List[List[int]]]:
         num_nodes = len(nodes)
         matrix = np.zeros((num_nodes, num_nodes, 0), dtype=int).tolist()
 
@@ -42,38 +42,31 @@ class Parser():
         return matrix
 
     @staticmethod
-    def parse_gml(gml: bytes) -> object:
-        gml_str = Parser.bytes_to_string(gml)
-        #temp_filepath = Parser.write_to_temp_file(gml)
-        graph = nx.parse_gml(gml_str)
-        del(gml)
-        #Parser.remove_file(temp_filepath)
-        nodes = list(graph.nodes)
-        #edges = list(graph.edges)
-        labels = nx.get_edge_attributes(graph, 'label')
-        matrix = Parser.gml_labels_to_matrix(nodes, labels)
-        
-        obj = {
+    def create_object(nodes: List[str], edges: List[str], matrix: List[List[List[int]]]) -> object:
+        return {
             "nodes": nodes,
             "matrix": matrix
         }
-        return obj
+
+    @staticmethod
+    def parse_gml(gml: bytes) -> object:
+        gml_str = Parser.bytes_to_string(gml)
+        del(gml)
+        graph = nx.parse_gml(gml_str)
+        nodes = list(graph.nodes)
+        edges = list(graph.edges)
+        labels = nx.get_edge_attributes(graph, 'label')
+        matrix = Parser.networkx_labels_to_matrix(nodes, labels)
+        return Parser.create_object(nodes, edges, matrix)
 
     @staticmethod
     def parse_graphml(graphml: bytes) -> object:
         graphml_str = Parser.bytes_to_string(graphml)
-        #temp_filepath = Parser.write_to_temp_file(graphml)
-        graph = nx.parse_graphml(graphml_str)
         del(graphml)
-        #Parser.remove_file(temp_filepath)
+        graph = nx.parse_graphml(graphml_str)
         nodes = list(graph.nodes)
-        #edges = list(graph.edges)
+        edges = list(graph.edges)
         labels = nx.get_edge_attributes(graph, 'label')
-        matrix = Parser.gml_labels_to_matrix(nodes, labels)
-        
-        obj = {
-            "nodes": nodes,
-            "matrix": matrix
-        }
-        return obj
+        matrix = Parser.networkx_labels_to_matrix(nodes, labels)
+        return Parser.create_object(nodes, edges, matrix)
     
