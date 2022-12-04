@@ -3,6 +3,7 @@ from os import path, remove
 from typing import List
 import numpy as np
 import networkx as nx
+from networkx import Graph
 
 class Parser():
     def __init__(self) -> None:
@@ -49,11 +50,21 @@ class Parser():
         }
 
     @staticmethod
+    def get_graph_nodes(graph: Graph, key="label") -> List[str]:
+        nodes = []
+        for _id, attributes in graph._node.items():
+            try:
+                nodes.append(attributes[key])
+            except:
+                nodes.append(_id)
+        return nodes
+
+    @staticmethod
     def parse_gml(gml: bytes) -> object:
         gml_str = Parser.bytes_to_string(gml)
         del(gml)
         graph = nx.parse_gml(gml_str)
-        nodes = list(graph.nodes)
+        nodes = Parser.get_graph_nodes(graph)
         edges = list(graph.edges)
         labels = nx.get_edge_attributes(graph, 'label')
         matrix = Parser.networkx_labels_to_matrix(nodes, labels)
@@ -64,7 +75,7 @@ class Parser():
         graphml_str = Parser.bytes_to_string(graphml)
         del(graphml)
         graph = nx.parse_graphml(graphml_str)
-        nodes = list(graph.nodes)
+        nodes = Parser.get_graph_nodes(graph)
         edges = list(graph.edges)
         labels = nx.get_edge_attributes(graph, 'label')
         matrix = Parser.networkx_labels_to_matrix(nodes, labels)
