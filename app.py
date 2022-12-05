@@ -1,4 +1,5 @@
 from flask import Flask, request, Response
+from flask_cors import CORS
 import json
 from graph_networkx import NetworkX
 from graph_graphviz import GraphViz
@@ -6,6 +7,7 @@ from graph_pyvis import Pyvis
 from parser_standards import Parser
 
 app = Flask(__name__)
+CORS(app)
 app.config['PROPAGATE_EXCEPTIONS'] = True
 
 @app.errorhandler(Exception)
