@@ -1,6 +1,6 @@
 import json
 from abc import ABCMeta, abstractmethod
-from typing import Any, Generator, Tuple
+from typing import Generator, Tuple
 
 class BaseGraph(metaclass=ABCMeta):
 
@@ -22,16 +22,16 @@ class BaseGraph(metaclass=ABCMeta):
         for node in self.__nodes:
             yield node
 
-    def _get_graph_edges(self) -> Generator[Tuple[str, str, int], None, None]:
+    def _get_graph_edges(self) -> Generator[Tuple[str, str, str], None, None]:
         num_nodes = len(self.__nodes)
         for node_a_index in range(num_nodes):
             node_a = self.__nodes[node_a_index]
             for node_b_index in range(num_nodes):
                 node_b = self.__nodes[node_b_index]
-                weights = self.__matrix[node_a_index][node_b_index]
-                for weight in weights:
-                    if (weight > 0):
-                        yield node_a, node_b, weight
+                labels = self.__matrix[node_a_index][node_b_index]
+                for label in labels:
+                    if (label != ''):
+                        yield node_a, node_b, label
 
     def create_graph(self) -> None:
         self.add_graph_nodes()

@@ -12,8 +12,8 @@ class GraphViz(BaseGraph):
             self.graph.node(node, node)
 
     def add_graph_edges(self) -> None:
-        for node_a, node_b, weight in super()._get_graph_edges():
-            self.graph.edge(node_a, node_b, label=str(weight))
+        for node_a, node_b, label in super()._get_graph_edges():
+            self.graph.edge(node_a, node_b, label=label)
 
     def print_graph_properties(self) -> None:
         print(self.graph.source)

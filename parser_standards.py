@@ -1,3 +1,4 @@
+from typing import List
 import tempfile
 from os import path, remove
 from typing import List
@@ -27,14 +28,17 @@ class Parser():
             remove(file_path)
 
     @staticmethod
-    def networkx_labels_to_matrix(nodes: List[str], labels: object) -> List[List[List[int]]]:
+    def networkx_labels_to_matrix(nodes: List[str], labels: object) -> List[List[List[str]]]:
         num_nodes = len(nodes)
-        matrix = np.zeros((num_nodes, num_nodes, 0), dtype=int).tolist()
+        matrix = np.empty((num_nodes, num_nodes, 0), dtype=str).tolist()
 
         for (node_A, node_B), label in labels.items():
-            node_A_index = nodes.index(node_A)
-            node_B_index = nodes.index(node_B)
-            label = int(label)
+            try:
+                node_A_index = nodes.index(node_A)
+                node_B_index = nodes.index(node_B)
+            except:
+                node_A_index = int(node_A)
+                node_B_index = int(node_B)
             try:
                 matrix[node_A_index][node_B_index].append(label)
             except:
@@ -43,7 +47,7 @@ class Parser():
         return matrix
 
     @staticmethod
-    def create_object(nodes: List[str], edges: List[str], matrix: List[List[List[int]]]) -> object:
+    def create_object(nodes: List[str], edges: List[str], matrix: List[List[List[str]]]) -> object:
         return {
             "nodes": nodes,
             "matrix": matrix
@@ -60,14 +64,18 @@ class Parser():
         return nodes
 
     @staticmethod
+    def get_edges_labels(graph: Graph, key="label") -> List[str]:
+        return nx.get_edge_attributes(graph, key)
+
+    @staticmethod
     def parse_gml(gml: bytes) -> object:
         gml_str = Parser.bytes_to_string(gml)
         del(gml)
         graph = nx.parse_gml(gml_str)
         nodes = Parser.get_graph_nodes(graph)
         edges = list(graph.edges)
-        labels = nx.get_edge_attributes(graph, 'label')
-        matrix = Parser.networkx_labels_to_matrix(nodes, labels)
+        edge_labels = Parser.get_edges_labels(graph, key='label')
+        matrix = Parser.networkx_labels_to_matrix(nodes, edge_labels)
         return Parser.create_object(nodes, edges, matrix)
 
     @staticmethod
@@ -77,7 +85,7 @@ class Parser():
         graph = nx.parse_graphml(graphml_str)
         nodes = Parser.get_graph_nodes(graph)
         edges = list(graph.edges)
-        labels = nx.get_edge_attributes(graph, 'label')
-        matrix = Parser.networkx_labels_to_matrix(nodes, labels)
+        edge_labels = Parser.get_edges_labels(graph, key='LinkLabel')
+        matrix = Parser.networkx_labels_to_matrix(nodes, edge_labels)
         return Parser.create_object(nodes, edges, matrix)
     

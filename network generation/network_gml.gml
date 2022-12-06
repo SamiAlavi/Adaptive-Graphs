@@ -54,15 +54,22 @@ graph[
         edge
         [
             source 0
-            target 1
+            target 0
             label "7"
+            id "(A -> A)"
+        ]
+        edge
+        [
+            source 0
+            target 1
+            label "5"
             id "(A -> B)"
         ]
         edge
         [
             source 0
             target 2
-            label "5"
+            label "7"
             id "(A -> C)"
         ]
         edge
@@ -76,92 +83,85 @@ graph[
         [
             source 0
             target 4
-            label "1"
+            label "5"
             id "(A -> E)"
         ]
         edge
         [
             source 0
             target 5
-            label "7"
+            label "9"
             id "(A -> F)"
         ]
         edge
         [
             source 0
             target 6
-            label "9"
+            label "3"
             id "(A -> G)"
         ]
         edge
         [
             source 0
             target 7
-            label "2"
+            label "3"
             id "(A -> H)"
         ]
         edge
         [
             source 0
             target 8
-            label "4"
+            label "2"
             id "(A -> I)"
         ]
         edge
         [
             source 0
             target 9
-            label "6"
+            label "4"
             id "(A -> J)"
         ]
         edge
         [
             source 1
             target 0
-            label "8"
+            label "1"
             id "(B -> A)"
         ]
         edge
         [
             source 1
             target 1
-            label "5"
+            label "4"
             id "(B -> B)"
         ]
         edge
         [
             source 1
             target 2
-            label "3"
+            label "9"
             id "(B -> C)"
         ]
         edge
         [
             source 1
             target 3
-            label "4"
+            label "2"
             id "(B -> D)"
         ]
         edge
         [
             source 1
             target 4
-            label "1"
+            label "4"
             id "(B -> E)"
         ]
         edge
         [
             source 1
             target 5
-            label "5"
+            label "3"
             id "(B -> F)"
-        ]
-        edge
-        [
-            source 1
-            target 6
-            label "2"
-            id "(B -> G)"
         ]
         edge
         [
@@ -174,28 +174,28 @@ graph[
         [
             source 1
             target 8
-            label "1"
+            label "9"
             id "(B -> I)"
         ]
         edge
         [
             source 1
             target 9
-            label "7"
+            label "3"
             id "(B -> J)"
         ]
         edge
         [
             source 2
             target 0
-            label "7"
+            label "1"
             id "(C -> A)"
         ]
         edge
         [
             source 2
             target 1
-            label "9"
+            label "1"
             id "(C -> B)"
         ]
         edge
@@ -209,35 +209,35 @@ graph[
         [
             source 2
             target 3
-            label "1"
+            label "2"
             id "(C -> D)"
         ]
         edge
         [
             source 2
             target 4
-            label "8"
+            label "5"
             id "(C -> E)"
         ]
         edge
         [
             source 2
             target 5
-            label "5"
+            label "8"
             id "(C -> F)"
         ]
         edge
         [
             source 2
             target 6
-            label "9"
+            label "7"
             id "(C -> G)"
         ]
         edge
         [
             source 2
             target 7
-            label "5"
+            label "7"
             id "(C -> H)"
         ]
         edge
@@ -251,14 +251,14 @@ graph[
         [
             source 2
             target 9
-            label "6"
+            label "9"
             id "(C -> J)"
         ]
         edge
         [
             source 3
             target 0
-            label "5"
+            label "1"
             id "(D -> A)"
         ]
         edge
@@ -272,85 +272,106 @@ graph[
         [
             source 3
             target 2
-            label "6"
+            label "9"
             id "(D -> C)"
         ]
         edge
         [
             source 3
             target 3
-            label "7"
+            label "2"
             id "(D -> D)"
         ]
         edge
         [
             source 3
             target 4
-            label "8"
+            label "4"
             id "(D -> E)"
         ]
         edge
         [
             source 3
             target 5
-            label "4"
+            label "7"
             id "(D -> F)"
         ]
         edge
         [
             source 3
             target 6
-            label "2"
+            label "8"
             id "(D -> G)"
         ]
         edge
         [
             source 3
             target 7
-            label "8"
+            label "1"
             id "(D -> H)"
         ]
         edge
         [
             source 3
             target 8
-            label "8"
+            label "7"
             id "(D -> I)"
         ]
         edge
         [
             source 3
             target 9
-            label "9"
+            label "5"
             id "(D -> J)"
         ]
         edge
         [
             source 4
+            target 0
+            label "1"
+            id "(E -> A)"
+        ]
+        edge
+        [
+            source 4
+            target 1
+            label "3"
+            id "(E -> B)"
+        ]
+        edge
+        [
+            source 4
             target 2
-            label "9"
+            label "8"
             id "(E -> C)"
         ]
         edge
         [
             source 4
             target 3
-            label "6"
+            label "1"
             id "(E -> D)"
         ]
         edge
         [
             source 4
-            target 4
-            label "7"
-            id "(E -> E)"
+            target 5
+            label "8"
+            id "(E -> F)"
         ]
         edge
         [
             source 4
             target 6
-            label "9"
+            label "4"
             id "(E -> G)"
+        ]
+        edge
+        [
+            source 4
+            target 7
+            label "3"
+            id "(E -> H)"
         ]
         edge
         [
@@ -361,44 +382,30 @@ graph[
         ]
         edge
         [
-            source 4
-            target 9
-            label "4"
-            id "(E -> J)"
-        ]
-        edge
-        [
             source 5
             target 0
-            label "8"
+            label "3"
             id "(F -> A)"
         ]
         edge
         [
             source 5
             target 1
-            label "8"
+            label "1"
             id "(F -> B)"
         ]
         edge
         [
             source 5
-            target 2
-            label "9"
-            id "(F -> C)"
-        ]
-        edge
-        [
-            source 5
             target 3
-            label "7"
+            label "3"
             id "(F -> D)"
         ]
         edge
         [
             source 5
             target 4
-            label "5"
+            label "8"
             id "(F -> E)"
         ]
         edge
@@ -412,133 +419,126 @@ graph[
         [
             source 5
             target 6
-            label "2"
+            label "1"
             id "(F -> G)"
         ]
         edge
         [
             source 5
             target 7
-            label "3"
+            label "8"
             id "(F -> H)"
         ]
         edge
         [
             source 5
             target 8
-            label "3"
+            label "4"
             id "(F -> I)"
+        ]
+        edge
+        [
+            source 5
+            target 9
+            label "5"
+            id "(F -> J)"
         ]
         edge
         [
             source 6
             target 0
-            label "3"
+            label "1"
             id "(G -> A)"
         ]
         edge
         [
             source 6
-            target 1
-            label "4"
-            id "(G -> B)"
-        ]
-        edge
-        [
-            source 6
             target 2
-            label "1"
+            label "2"
             id "(G -> C)"
         ]
         edge
         [
             source 6
             target 3
-            label "8"
+            label "9"
             id "(G -> D)"
         ]
         edge
         [
             source 6
             target 4
-            label "5"
+            label "4"
             id "(G -> E)"
         ]
         edge
         [
             source 6
             target 6
-            label "1"
+            label "7"
             id "(G -> G)"
         ]
         edge
         [
             source 6
             target 7
-            label "9"
+            label "3"
             id "(G -> H)"
         ]
         edge
         [
             source 6
             target 8
-            label "5"
+            label "3"
             id "(G -> I)"
         ]
         edge
         [
             source 6
             target 9
-            label "8"
+            label "6"
             id "(G -> J)"
         ]
         edge
         [
             source 7
             target 0
-            label "8"
+            label "5"
             id "(H -> A)"
         ]
         edge
         [
             source 7
-            target 1
-            label "4"
-            id "(H -> B)"
-        ]
-        edge
-        [
-            source 7
             target 2
-            label "7"
+            label "8"
             id "(H -> C)"
         ]
         edge
         [
             source 7
             target 3
-            label "1"
+            label "9"
             id "(H -> D)"
         ]
         edge
         [
             source 7
             target 4
-            label "7"
+            label "1"
             id "(H -> E)"
         ]
         edge
         [
             source 7
             target 5
-            label "8"
+            label "6"
             id "(H -> F)"
         ]
         edge
         [
             source 7
             target 6
-            label "3"
+            label "5"
             id "(H -> G)"
         ]
         edge
@@ -552,50 +552,57 @@ graph[
         [
             source 7
             target 8
-            label "5"
+            label "9"
             id "(H -> I)"
         ]
         edge
         [
             source 7
             target 9
-            label "6"
+            label "4"
             id "(H -> J)"
         ]
         edge
         [
             source 8
+            target 0
+            label "9"
+            id "(I -> A)"
+        ]
+        edge
+        [
+            source 8
             target 1
-            label "1"
+            label "9"
             id "(I -> B)"
         ]
         edge
         [
             source 8
+            target 2
+            label "8"
+            id "(I -> C)"
+        ]
+        edge
+        [
+            source 8
             target 3
-            label "4"
+            label "1"
             id "(I -> D)"
         ]
         edge
         [
             source 8
             target 4
-            label "7"
+            label "4"
             id "(I -> E)"
         ]
         edge
         [
             source 8
             target 5
-            label "2"
+            label "8"
             id "(I -> F)"
-        ]
-        edge
-        [
-            source 8
-            target 6
-            label "3"
-            id "(I -> G)"
         ]
         edge
         [
@@ -608,7 +615,7 @@ graph[
         [
             source 8
             target 8
-            label "3"
+            label "6"
             id "(I -> I)"
         ]
         edge
@@ -622,63 +629,70 @@ graph[
         [
             source 9
             target 0
-            label "6"
+            label "7"
             id "(J -> A)"
         ]
         edge
         [
             source 9
             target 1
-            label "5"
+            label "3"
             id "(J -> B)"
         ]
         edge
         [
             source 9
             target 2
-            label "3"
+            label "7"
             id "(J -> C)"
         ]
         edge
         [
             source 9
             target 3
-            label "2"
+            label "7"
             id "(J -> D)"
         ]
         edge
         [
             source 9
             target 4
-            label "2"
+            label "6"
             id "(J -> E)"
         ]
         edge
         [
             source 9
+            target 5
+            label "5"
+            id "(J -> F)"
+        ]
+        edge
+        [
+            source 9
             target 6
-            label "9"
+            label "7"
             id "(J -> G)"
         ]
         edge
         [
             source 9
             target 7
-            label "1"
+            label "5"
             id "(J -> H)"
         ]
         edge
         [
             source 9
             target 8
-            label "6"
+            label "8"
             id "(J -> I)"
         ]
         edge
         [
             source 9
             target 9
-            label "7"
+            label "5"
             id "(J -> J)"
         ]
         

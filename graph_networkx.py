@@ -1,4 +1,3 @@
-from typing import Any
 import networkx as nx
 import matplotlib
 import matplotlib.pyplot as plt
@@ -17,8 +16,8 @@ class NetworkX(BaseGraph):
             self.graph.add_node(node)
 
     def add_graph_edges(self) -> None:
-        for node_a, node_b, weight in super()._get_graph_edges():
-            self.graph.add_edge(node_a, node_b, label=weight)
+        for node_a, node_b, label in super()._get_graph_edges():
+            self.graph.add_edge(node_a, node_b, label=label)
 
     def print_graph_properties(self) -> None:
         print("Total number of nodes: ", int(self.graph.number_of_nodes()))
