@@ -8,7 +8,7 @@ class Pyvis(NetworkX):
         self.options = {
             "height": "600px",
             "width": "100%",
-            "directed": False,
+            "directed": True,
             "notebook": False,
             "neighborhood_highlight": False,
             "select_menu": False,
@@ -20,10 +20,9 @@ class Pyvis(NetworkX):
             "cdn_resources": "remote"
         }
 
-        keys = ["height", "width", "directed", "notebook", "neighborhood_highlight",
-            "select_menu", "bgcolor", "font_color", "layout", "heading", "cdn_resources"]
+        filtered_keys = ["height", "width", "neighborhood_highlight", "bgcolor", "font_color"]
         
-        for key in keys:
+        for key in filtered_keys:
             if (key in options):
                 self.options[key] = options[key]
 
