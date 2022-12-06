@@ -105,7 +105,7 @@ def create_graphjson(nodes: List[str], matrix: List[List[List[str]]], minify_jso
     with open("network_graphjson.json", "w", encoding="utf-8") as file:
         json.dump(graph_json, file, indent=indent)
 
-def create_gml(nodes: List[str], matrix: List[List[List[int]]]) -> None:
+def create_gml(nodes: List[str], matrix: List[List[List[str]]]) -> None:
     gml_nodes = []
     gml_edges = []
 
