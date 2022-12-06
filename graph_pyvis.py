@@ -5,26 +5,30 @@ from graph_networkx import NetworkX
 class Pyvis(NetworkX):
 
     def set_options(self, options: dict) -> None:
-        if (options):
-            self.options = options
-        else:
-            self.options = {
-                "height": "600px",
-                "width": "100%",
-                "directed": False,
-                "notebook": False,
-                "neighborhood_highlight": False,
-                "select_menu": False,
-                "filter_menu": False,
-                "bgcolor": "#ffffff",
-                "font_color": False,
-                "layout": None,
-                "heading": "",
-                "cdn_resources": "remote"
-            }
+        self.options = {
+            "height": "600px",
+            "width": "100%",
+            "directed": False,
+            "notebook": False,
+            "neighborhood_highlight": False,
+            "select_menu": False,
+            "filter_menu": False,
+            "bgcolor": "#ffffff",
+            "font_color": False,
+            "layout": None,
+            "heading": "",
+            "cdn_resources": "remote"
+        }
+
+        keys = ["height", "width", "directed", "notebook", "neighborhood_highlight",
+            "select_menu", "bgcolor", "font_color", "layout", "heading", "cdn_resources"]
+        
+        for key in keys:
+            if (key in options):
+                self.options[key] = options[key]
 
 
-    def __init__(self, options: dict=None) -> None:
+    def __init__(self, options: dict={}) -> None:
         super().__init__()
         self.set_options(options)
 
@@ -32,14 +36,14 @@ class Pyvis(NetworkX):
             height=self.options["height"],
             width=self.options["width"],
             directed=self.options["directed"],
-            notebook=False,
+            notebook=self.options["notebook"],
             neighborhood_highlight=self.options["neighborhood_highlight"],
-            select_menu=False,
-            filter_menu=False,
+            select_menu=self.options["select_menu"],
+            filter_menu=self.options["filter_menu"],
             bgcolor=self.options["bgcolor"],
             font_color=self.options["font_color"],
-            layout=None,
-            heading="",
+            layout=self.options["layout"],
+            heading=self.options["heading"],
             cdn_resources=self.options["cdn_resources"]
             )
 

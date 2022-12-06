@@ -81,7 +81,12 @@ def graphviz() -> str:
 
 @app.route("/graph/pyvis", methods=['POST'])
 def pyvis() -> str:
-    graph = Pyvis()
+    options = {}
+    try:
+        options = request.json["options"]
+    except:
+        pass
+    graph = Pyvis(options)
     graph.read_network_json(request.json)
     graph.create_graph()
     image_html = graph.get_graph_data()
