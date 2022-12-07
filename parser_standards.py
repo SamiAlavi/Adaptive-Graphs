@@ -1,6 +1,4 @@
 from typing import List
-import tempfile
-from os import path, remove
 from typing import List
 import numpy as np
 import networkx as nx
@@ -15,22 +13,9 @@ class Parser():
         return bytes.decode()
 
     @staticmethod
-    def write_to_temp_file(string_bytes: bytes) -> str:
-        temp =  tempfile.NamedTemporaryFile(prefix='_ADG_', suffix='.adg', delete=False)
-        temp.write(string_bytes)
-        temp.seek(0)
-        temp.close()
-        return temp.name
-
-    @staticmethod
-    def remove_file(file_path: str) -> None:
-        if (path.exists(file_path)):
-            remove(file_path)
-
-    @staticmethod
     def networkx_labels_to_matrix(nodes: List[str], labels: object) -> List[List[List[str]]]:
         num_nodes = len(nodes)
-        matrix = np.empty((num_nodes, num_nodes, 0), dtype=str).tolist()
+        matrix: List[List[List[str]]] = np.empty((num_nodes, num_nodes, 0), dtype=str).tolist()
 
         for (node_A, node_B), label in labels.items():
             try:
@@ -47,7 +32,7 @@ class Parser():
         return matrix
 
     @staticmethod
-    def create_object(nodes: List[str], edges: List[str], matrix: List[List[List[str]]]) -> object:
+    def create_object(nodes: List[str], edges: List[str], matrix: List[List[List[str]]]) -> dict:
         return {
             "nodes": nodes,
             "matrix": matrix
@@ -68,7 +53,7 @@ class Parser():
         return nx.get_edge_attributes(graph, key)
 
     @staticmethod
-    def parse_gml(gml: bytes) -> object:
+    def parse_gml(gml: bytes) -> dict:
         gml_str = Parser.bytes_to_string(gml)
         del(gml)
         graph = nx.parse_gml(gml_str)
@@ -79,7 +64,7 @@ class Parser():
         return Parser.create_object(nodes, edges, matrix)
 
     @staticmethod
-    def parse_graphml(graphml: bytes) -> object:
+    def parse_graphml(graphml: bytes) -> dict:
         graphml_str = Parser.bytes_to_string(graphml)
         del(graphml)
         graph = nx.parse_graphml(graphml_str)
