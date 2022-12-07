@@ -1,8 +1,7 @@
-from typing import List
-from typing import List
+from typing import List, Any, Callable
 import numpy as np
 import networkx as nx
-from networkx import Graph
+from networkx import DiGraph, Graph, MultiDiGraph, MultiGraph
 
 class Parser():
     def __init__(self) -> None:
@@ -13,7 +12,7 @@ class Parser():
         return bytes.decode()
 
     @staticmethod
-    def networkx_labels_to_matrix(nodes: List[str], labels: object) -> List[List[List[str]]]:
+    def networkx_labels_to_matrix(nodes: List[str], labels: dict) -> List[List[List[str]]]:
         num_nodes = len(nodes)
         matrix: List[List[List[str]]] = np.empty((num_nodes, num_nodes, 0), dtype=str).tolist()
 
@@ -32,7 +31,18 @@ class Parser():
         return matrix
 
     @staticmethod
-    def create_object(nodes: List[str], edges: List[str], matrix: List[List[List[str]]]) -> dict:
+    def parse(standard_bytes: bytes, parser: Callable[[str], (Any | DiGraph | Graph | MultiDiGraph | MultiGraph)], label_key: str) -> dict:
+        standard_str = Parser.bytes_to_string(standard_bytes)
+        del(standard_bytes)
+        graph = parser(standard_str)
+        nodes = Parser.get_graph_nodes(graph)
+        edges = list(graph.edges)
+        edge_labels = Parser.get_edges_labels(graph, key=label_key)
+        matrix = Parser.networkx_labels_to_matrix(nodes, edge_labels)
+        return Parser.get_json(nodes, edges, matrix)
+
+    @staticmethod
+    def get_json(nodes: List[str], edges: List[str], matrix: List[List[List[str]]]) -> dict:
         return {
             "nodes": nodes,
             "matrix": matrix
@@ -49,28 +59,14 @@ class Parser():
         return nodes
 
     @staticmethod
-    def get_edges_labels(graph: Graph, key="label") -> List[str]:
+    def get_edges_labels(graph: Graph, key) -> List[str]:
         return nx.get_edge_attributes(graph, key)
 
     @staticmethod
     def parse_gml(gml: bytes) -> dict:
-        gml_str = Parser.bytes_to_string(gml)
-        del(gml)
-        graph = nx.parse_gml(gml_str)
-        nodes = Parser.get_graph_nodes(graph)
-        edges = list(graph.edges)
-        edge_labels = Parser.get_edges_labels(graph, key='label')
-        matrix = Parser.networkx_labels_to_matrix(nodes, edge_labels)
-        return Parser.create_object(nodes, edges, matrix)
+        return Parser.parse(gml, nx.parse_gml, "label")
 
     @staticmethod
     def parse_graphml(graphml: bytes) -> dict:
-        graphml_str = Parser.bytes_to_string(graphml)
-        del(graphml)
-        graph = nx.parse_graphml(graphml_str)
-        nodes = Parser.get_graph_nodes(graph)
-        edges = list(graph.edges)
-        edge_labels = Parser.get_edges_labels(graph, key='LinkLabel')
-        matrix = Parser.networkx_labels_to_matrix(nodes, edge_labels)
-        return Parser.create_object(nodes, edges, matrix)
+        return Parser.parse(graphml, nx.parse_graphml, "LinkLabel")
     
