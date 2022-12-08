@@ -1,3 +1,4 @@
+from exporter import Exporter
 from flask import Flask, request, Response
 from flask_cors import CORS
 import json
@@ -98,16 +99,12 @@ def parse() -> str:
     file = request.files.get(key)
     if (file):
         return Parser.parse(file)
-    else:
-        raise Exception(f"No file in form data with key '{key}' found")
+    raise Exception(f"No file in form data with key '{key}' found")
 
-@app.route("/parse/gml", methods=['POST'])
+@app.route("/export", methods=['POST'])
 def parse_gml() -> str:
-    return Parser.parse_gml(request.data)
-
-@app.route("/parse/graphml", methods=['POST'])
-def parse_graphml() -> str:
-    return Parser.parse_graphml(request.data)
+    exporter = Exporter()
+    return exporter.export(request.json)    
 
 app.register_error_handler(401, error_401_handler)
 
