@@ -22,6 +22,8 @@ class Parser():
                 node_A_index = nodes.index(node_A)
                 node_B_index = nodes.index(node_B)
             except:
+                node_A = ''.join(filter(str.isdigit, node_A))
+                node_B = ''.join(filter(str.isdigit, node_B))
                 node_A_index = int(node_A)
                 node_B_index = int(node_B)
             try:
@@ -65,7 +67,7 @@ class Parser():
 
     @staticmethod
     def parse_gml(gml: bytes) -> dict:
-        return Parser.parse_bytes(gml, nx.parse_gml, "label")
+        return Parser.parse_bytes(gml, nx.parse_gml, "LinkLabel")
 
     @staticmethod
     def parse_graphml(graphml: bytes) -> dict:

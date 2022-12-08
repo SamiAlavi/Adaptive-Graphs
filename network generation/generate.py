@@ -116,6 +116,7 @@ def create_gml(nodes: List[str], matrix: List[List[List[str]]]) -> None:
         [
             id {node_id}
             label "{node_name}"
+            LinkLabel "{node_name}"
         ]
         """
         gml_nodes.append(gml_node)
@@ -126,6 +127,7 @@ def create_gml(nodes: List[str], matrix: List[List[List[str]]]) -> None:
             source {node_ids[node_a]}
             target {node_ids[node_b]}
             label "{label}"
+            LinkLabel "{label}"
             id "({node_a} -> {node_b})"
         ]
         """
