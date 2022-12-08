@@ -31,12 +31,10 @@ def before_request_callback():
     method = request.method 
     path = request.path
          
-    if (path.startswith("/graph") and method == "POST"):
+    if (method=="POST" and (path.startswith("/graph") or path.startswith("/export"))):
         error_message = validate_graph()
         if (error_message):
             return error_response(400, error_message)
-    elif (path.startswith("/parse")):
-        pass
 
 def validate_graph() -> str:
     graph_content_type = 'application/json'

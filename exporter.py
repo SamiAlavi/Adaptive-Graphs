@@ -7,8 +7,11 @@ from graph_networkx import NetworkX
 class Exporter(NetworkX):
 
     def export(self, network):
-        file_type = network["file_type"]
-        del(network["file_type"])
+        try:
+            file_type = network["file_type"]
+            del(network["file_type"])
+        except:
+            raise Exception("Request JSON does not has 'file_type' key")
 
         if (file_type == "json"):
             return self.export_json_format(network)
