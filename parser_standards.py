@@ -1,5 +1,6 @@
 from typing import List, Any, Callable
 import numpy as np
+from pathlib import Path
 import networkx as nx
 from networkx import DiGraph, Graph, MultiDiGraph, MultiGraph
 
@@ -31,7 +32,7 @@ class Parser():
         return matrix
 
     @staticmethod
-    def parse(standard_bytes: bytes, parser: Callable[[str], (Any | DiGraph | Graph | MultiDiGraph | MultiGraph)], label_key: str) -> dict:
+    def parse_bytes(standard_bytes: bytes, parser: Callable[[str], (Any | DiGraph | Graph | MultiDiGraph | MultiGraph)], label_key: str) -> dict:
         standard_str = Parser.bytes_to_string(standard_bytes)
         del(standard_bytes)
         graph = parser(standard_str)
@@ -64,9 +65,21 @@ class Parser():
 
     @staticmethod
     def parse_gml(gml: bytes) -> dict:
-        return Parser.parse(gml, nx.parse_gml, "label")
+        return Parser.parse_bytes(gml, nx.parse_gml, "label")
 
     @staticmethod
     def parse_graphml(graphml: bytes) -> dict:
-        return Parser.parse(graphml, nx.parse_graphml, "LinkLabel")
+        return Parser.parse_bytes(graphml, nx.parse_graphml, "LinkLabel")
+
+    @staticmethod
+    def parse(file: Any) -> dict:
+        file_extension = Path(file.filename).suffix.lower()
+        file.stream.seek(0)
+        standard_bytes = file.read()
+        if (file_extension == ".gml"):
+            return Parser.parse_gml(standard_bytes)
+        elif (file_extension == ".graphml"):
+            return Parser.parse_graphml(standard_bytes)
+        else:
+            raise Exception(f"Extension not supported for parsing: '{file_extension}'")
     

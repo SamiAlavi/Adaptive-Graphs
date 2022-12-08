@@ -92,6 +92,15 @@ def pyvis() -> str:
     image_html = graph.get_graph_data()
     return image_html
 
+@app.route("/parse", methods=['POST'])
+def parse() -> str:
+    key = "File"
+    file = request.files.get(key)
+    if (file):
+        return Parser.parse(file)
+    else:
+        raise Exception(f"No file in form data with key '{key}' found")
+
 @app.route("/parse/gml", methods=['POST'])
 def parse_gml() -> str:
     return Parser.parse_gml(request.data)
