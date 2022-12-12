@@ -1,6 +1,7 @@
 from typing import List, Any, Callable
 import numpy as np
 from pathlib import Path
+import json
 import networkx as nx
 from networkx import DiGraph, Graph, MultiDiGraph, MultiGraph
 
@@ -67,11 +68,32 @@ class Parser():
 
     @staticmethod
     def parse_gml(gml: bytes) -> dict:
-        return Parser.parse_bytes(gml, nx.parse_gml, "LinkLabel")
+        return Parser.parse_bytes(gml, nx.parse_gml, "label")
 
     @staticmethod
     def parse_graphml(graphml: bytes) -> dict:
-        return Parser.parse_bytes(graphml, nx.parse_graphml, "LinkLabel")
+        return Parser.parse_bytes(graphml, nx.parse_graphml, "label")
+
+    @staticmethod
+    def parse_json(json_bytes: bytes) -> dict:
+        standard_str = Parser.bytes_to_string(json_bytes)
+        del(json_bytes)
+        obj = json.loads(standard_str)
+
+        if (not ("nodes" in obj and "matrix" in obj)):
+            return f'Request body JSON should have "nodes" and "matrix"'
+
+        nodes = obj["nodes"]
+        matrix = obj["matrix"]
+        num_nodes = len(nodes)
+        rows_matrix = len(matrix)
+
+        if (rows_matrix < num_nodes):            
+            return f"Matrix shape is not correct. Minimum required: ({num_nodes}, {num_nodes})"
+        for row in matrix:
+            if (len(row) < num_nodes):
+                return f"Matrix shape is not correct. Minimum required: ({num_nodes}, {num_nodes})"
+        return obj
 
     @staticmethod
     def parse(file: Any) -> dict:
@@ -82,6 +104,8 @@ class Parser():
             return Parser.parse_gml(standard_bytes)
         elif (file_extension == ".graphml"):
             return Parser.parse_graphml(standard_bytes)
+        elif (file_extension == ".json"):
+            return Parser.parse_json(standard_bytes)
         else:
             raise Exception(f"Extension not supported for parsing: '{file_extension}'")
     
