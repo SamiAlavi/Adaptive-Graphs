@@ -182,72 +182,72 @@ graph [
   edge [
     source 0
     target 10
-    LinkLabel "< 10 Gbps"
+    label "< 10 Gbps"
   ]
   edge [
     source 0
     target 3
-    LinkLabel "< 10 Gbps"
+    label "< 10 Gbps"
   ]
   edge [
     source 0
     target 6
-    LinkLabel "< 10 Gbps"
+    label "< 10 Gbps"
   ]
   edge [
     source 1
     target 3
-    LinkLabel "< 10 Gbps"
+    label "< 10 Gbps"
   ]
   edge [
     source 1
     target 6
-    LinkLabel "< 10Gbps"
+    label "< 10Gbps"
   ]
   edge [
     source 2
     target 10
-    LinkLabel "< 10 Gbps"
+    label "< 10 Gbps"
   ]
   edge [
     source 2
     target 15
-    LinkLabel "< 10 Gbps"
+    label "< 10 Gbps"
   ]
   edge [
     source 3
     target 8
-    LinkLabel "< 1 Gbps"
+    label "< 1 Gbps"
   ]
   edge [
     source 3
     target 16
-    LinkLabel "< 10 Gbps"
+    label "< 10 Gbps"
   ]
   edge [
     source 4
     target 5
-    LinkLabel "< 2.5 Gbps"
+    label "< 2.5 Gbps"
   ]
   edge [
     source 4
     target 7
-    LinkLabel "< 2.5 Gbps"
+    label "< 2.5 Gbps"
   ]
   edge [
     source 6
     target 7
-    LinkLabel "< 2.5 Gbps"
+    label "< 2.5 Gbps"
   ]
   edge [
     source 9
     target 16
-    LinkLabel "< 155 Mbps"
+    label "< 155 Mbps"
   ]
   edge [
     source 9
     target 15
-    LinkLabel "< 155 Mbps"
+    label "< 155 Mbps"
   ]
   edge [
     source 11
@@ -257,17 +257,17 @@ graph [
   edge [
     source 11
     target 13
-    LinkLabel "< 10 Gbps"
+    label "< 10 Gbps"
   ]
   edge [
     source 12
     target 14
-    LinkLabel "< 2.5 Gbps"
+    label "< 2.5 Gbps"
   ]
   edge [
     source 13
     target 18
-    LinkLabel "< 155 Mbps"
+    label "< 155 Mbps"
   ]
   edge [
     source 13
@@ -277,26 +277,26 @@ graph [
   edge [
     source 13
     target 15
-    LinkLabel "< 10 Gbps"
+    label "< 10 Gbps"
   ]
   edge [
     source 14
     target 16
-    LinkLabel "< 2.5 Gbps"
+    label "< 2.5 Gbps"
   ]
   edge [
     source 14
     target 17
-    LinkLabel "< 155 Mbps"
+    label "< 155 Mbps"
   ]
   edge [
     source 15
     target 16
-    LinkLabel "< 10 Gbps"
+    label "< 10 Gbps"
   ]
   edge [
     source 17
     target 18
-    LinkLabel "< 155 Mbps"
+    label "< 155 Mbps"
   ]
 ]
