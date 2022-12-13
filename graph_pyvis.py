@@ -3,9 +3,48 @@ from graph_networkx import NetworkX
 
 # TODO 1: Update code as necessary after package gets updated
 class Pyvis(NetworkX):
-    def __init__(self) -> None:
+
+    def set_options(self, options: dict) -> None:
+        self.options = {
+            "height": "600px",
+            "width": "100%",
+            "directed": True,
+            "notebook": False,
+            "neighborhood_highlight": False,
+            "select_menu": False,
+            "filter_menu": False,
+            "bgcolor": "#ffffff",
+            "font_color": False,
+            "layout": None,
+            "heading": "",
+            "cdn_resources": "remote"
+        }
+
+        filtered_keys = ["height", "width", "neighborhood_highlight", "bgcolor", "font_color"]
+        
+        for key in filtered_keys:
+            if (key in options):
+                self.options[key] = options[key]
+
+
+    def __init__(self, options: dict={}) -> None:
         super().__init__()
-        self.network = Network(height="98vh")
+        self.set_options(options)
+
+        self.network = Network(
+            height=self.options["height"],
+            width=self.options["width"],
+            directed=self.options["directed"],
+            notebook=self.options["notebook"],
+            neighborhood_highlight=self.options["neighborhood_highlight"],
+            select_menu=self.options["select_menu"],
+            filter_menu=self.options["filter_menu"],
+            bgcolor=self.options["bgcolor"],
+            font_color=self.options["font_color"],
+            layout=self.options["layout"],
+            heading=self.options["heading"],
+            cdn_resources=self.options["cdn_resources"]
+            )
 
     def create_graph(self) -> None:
         super().create_graph()
@@ -25,7 +64,6 @@ class Pyvis(NetworkX):
                     "font": {
                         "strokeWidth": 0.1
                     },
-                    "selfReferenceSize": null,
                     "selfReference": {
                         "angle": 0.7853981633974483
                     },
@@ -49,6 +87,9 @@ class Pyvis(NetworkX):
         file_path = f"{getcwd()}/graphs/Graph_Pyvis.html"
         self.network.write_html(file_path)
         self.network.show(file_path)
+
+    def get_graph_data(self) -> str:
+        return self.network.generate_html()
 
 
 if (__name__ == "__main__"):
