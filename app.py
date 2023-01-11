@@ -1,13 +1,16 @@
 from exporter import Exporter
-from flask import Flask, request, Response
+from flask import Flask, request, Response, send_from_directory
 from flask_cors import CORS
 import json
+import os
+import sys
+from NullIO import NullIO
 from graph_networkx import NetworkX
 from graph_graphviz import GraphViz
 from graph_pyvis import Pyvis
 from parser_standards import Parser
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='build')
 CORS(app)
 app.config['PROPAGATE_EXCEPTIONS'] = True
 
@@ -57,10 +60,6 @@ def validate_graph() -> str:
             return f"Matrix shape is not correct. Minimum required: ({num_nodes}, {num_nodes})"
         
 
-@app.route("/", methods=['GET'])
-def home() -> str:
-    return "Hello, Flask!"
-
 @app.route("/graph/networkx", methods=['POST'])
 def networkx() -> str:
     graph = NetworkX()
@@ -106,5 +105,21 @@ def parse_gml() -> str:
 
 app.register_error_handler(401, error_401_handler)
 
+# @app.route("/", methods=['GET'])
+# def home() -> str:
+#     return "Hello, Flask!"
+
+# Serve App
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    if path != "" and os.path.exists(app.static_folder + '/' + path):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
+
+debug = False
 if __name__ == '__main__':
-    app.run(debug=False)
+    if (not debug):
+        sys.stdout = NullIO()
+    app.run(debug=debug)
