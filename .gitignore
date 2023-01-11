@@ -1,6 +1,5 @@
 __pycache__/
 graphs/
 lib/
-build/*
 
 !build/.gitkeep
