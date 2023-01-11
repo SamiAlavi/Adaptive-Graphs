@@ -122,4 +122,4 @@ debug = False
 if __name__ == '__main__':
     if (not debug):
         sys.stdout = NullIO()
-    app.run(debug=debug)
+    app.run(debug=debug, port=os.getenv("PORT", default=5000))
